@@ -1,0 +1,5 @@
+const FEATURED_API = process.env.REACT_APP_FEATURED_API
+const IMG_API = process.env.REACT_APP_IMG_API
+const SEARCH_API = process.env.REACT_APP_SEARCH_API
+
+export {FEATURED_API, IMG_API, SEARCH_API}

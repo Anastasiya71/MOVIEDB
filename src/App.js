@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
+import { FEATURED_API } from "./services/config"
 import Movie from "./components/Movie"
-
-const FEATURED_API = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=25b5e09a368009786b0ac23153e6af6f&page=1";
-
-
-const SEARCH_API = "https://api.themoviedb.org/3/search/movie?&api_key=25b5e09a368009786b0ac23153e6af6f&query=";
-
 
 
 function App() {
@@ -14,10 +8,12 @@ function App() {
 
     useEffect(() => {
         fetch(FEATURED_API)
-            .then((res) => res.json())
+            .then((res) => (res.status === 200) ? res.json() : 'error' )
             .then((data) => {
-                console.log(data);
-                setMovies(data.results);
+                if (data === 'error') {console.error('Sorry, there was an unexpected error!'); 
+                alert('Sorry, there was an unexpected error!')} 
+                else {setMovies(data.results)}
+                
             });
     }, []);
 
