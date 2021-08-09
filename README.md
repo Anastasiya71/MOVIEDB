@@ -1,9 +1,7 @@
-## Movies App w/ React
+## Movies App React
 
-- React (CRA) cleanup
 - API calls
-- Search
 - Movie info
 
-API staff
-
+## Run app:
+- npm start
