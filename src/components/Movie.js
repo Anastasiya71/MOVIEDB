@@ -1,4 +1,3 @@
-import React from 'react';
 import { IMG_API } from "../services/config"
 
 const Movie = ({ title, poster_path, overview, vote_average }) => (

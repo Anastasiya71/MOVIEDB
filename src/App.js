@@ -9,7 +9,7 @@ function App() {
 
     useEffect(() => {
         fetch(FEATURED_API)
-            .then((res) => (res.status === 200) ? res.json() : "error" )
+            .then((res) => (res.status >= 200 && res.status < 400) ? res.json() : "error" )
             .then((data) => {
                 if (data === "error") {console.error("Sorry, there was an unexpected error!"); 
                 alert("Sorry, there was an unexpected error!")} 
@@ -22,11 +22,14 @@ function App() {
 
         if (searchTerm) {
             fetch(SEARCH_API + searchTerm)
-                .then((res) => (res.status === 200) ? res.json() : "error" )
+                .then((res) => (res.status >= 200 && res.status < 400) ? res.json() : "error" )
                 .then((data) => {
-                    if (data === "error") {console.error("Sorry, there was an unexpected error!"); 
-                    alert("Sorry, there was an unexpected error!")} 
-                    else {setMovies(data.results)};
+                    if (data === "error") {
+                        console.error("Sorry, there was an unexpected error!"); 
+                        alert("Sorry, there was an unexpected error!")
+                    } else {
+                        setMovies(data.results)
+                    };
                 });
 
                 setSearchTerm("");
@@ -52,8 +55,9 @@ function App() {
                 </form>
             </header>
             <div className="movie-container">
-                {movies.length > 0 && 
-                    movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+                {movies.length > 0 ? 
+                (movies.map((movie) => <Movie key={movie.id} {...movie} />)) : 
+                <p>Nothing was found for your search!</p>}             
             </div>
         </>
     );
